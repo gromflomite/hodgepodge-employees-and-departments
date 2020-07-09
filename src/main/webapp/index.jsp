@@ -28,15 +28,9 @@
 
 	<main class="container">
 
-		<br>
-
 		<h1>UF2176 - Exercice 2 (08-07-2020)</h1>
 
-		<br>
-
-		<h2>Raw list</h2>
-
-		<br>
+		<h2>Raw complete list</h2>
 
 		<ol>
 			<c:forEach items="${dbRegisters}" var="db">
@@ -44,7 +38,7 @@
 			</c:forEach>
 		</ol>
 
-		<h2>Table list</h2>
+		<h2>Employees table list</h2>
 
 		<br>
 
@@ -70,16 +64,15 @@
 						<td>${dbr.nameEmployee}</td>
 						<td>${dbr.firstSurnameEmployee}</td>
 						<td>${dbr.secondSurnameEmployee}</td>
-						<td>${dbr.idDepartmentEmployee}</td>
+						<td>${dbr.department.departmentName}</td>
 					</tr>
 				</c:forEach>
-
 
 			</tbody>
 
 		</table>
-
-		<h3 class="todo">TODO: Complete the table including department values - Fix Datatables</h3>
+		
+		<h2>Departments table list</h2>
 
 	</main>
 
