@@ -1,7 +1,25 @@
-h1 {
-	color: blue;
+body {	
+	font-family: 'Spartan', sans-serif;
 }
 
-.todo {
-	color: red;
+h1 {
+	color: #ffffff;
+	background-color: #782525;
+	padding-bottom: 5px;
+	padding-top: 12px;
+	padding-left: 15px;
+	border-radius: 15px;
+}
+
+h2 {
+	color: #ffffff;
+	background-color: #034a01;	
+	padding-top: 8px;
+	padding-left: 15px;
+	padding-bottom: 5px;
+	border-radius: 15px;
+}
+
+.budget-badges {
+	padding-top: 6px;
 }

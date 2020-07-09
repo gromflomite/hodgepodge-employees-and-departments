@@ -17,16 +17,13 @@ public class HomeController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final EmployeeDAO employeeDAO = new EmployeeDAO();
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    private static final EmployeeDAO employeeDAO = new EmployeeDAO();   
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	
 	ArrayList<Employee> dbRegisters = employeeDAO.getAll();
-
-	request.setAttribute("dbRegisters", dbRegisters);
-
+	request.setAttribute("dbRegisters", dbRegisters);	
 	request.getRequestDispatcher("index.jsp").forward(request, response);
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

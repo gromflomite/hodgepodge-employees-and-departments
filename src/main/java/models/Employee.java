@@ -6,6 +6,7 @@ public class Employee {
     private String nameEmployee;
     private String firstSurnameEmployee;
     private String secondSurnameEmployee;
+    private String nif;
     private int idDepartmentEmployee;
     private Department department;
 
@@ -15,62 +16,71 @@ public class Employee {
 	this.nameEmployee = "";
 	this.firstSurnameEmployee = "";
 	this.secondSurnameEmployee = "";
+	this.nif = "";
 	this.idDepartmentEmployee = 0;
 	this.department = new Department();
     }
 
     public int getIdEmployee() {
-	return idEmployee;
+        return idEmployee;
     }
 
     public void setIdEmployee(int idEmployee) {
-	this.idEmployee = idEmployee;
+        this.idEmployee = idEmployee;
     }
 
     public String getNameEmployee() {
-	return nameEmployee;
+        return nameEmployee;
     }
 
     public void setNameEmployee(String nameEmployee) {
-	this.nameEmployee = nameEmployee;
+        this.nameEmployee = nameEmployee;
     }
 
     public String getFirstSurnameEmployee() {
-	return firstSurnameEmployee;
+        return firstSurnameEmployee;
     }
 
     public void setFirstSurnameEmployee(String firstSurnameEmployee) {
-	this.firstSurnameEmployee = firstSurnameEmployee;
+        this.firstSurnameEmployee = firstSurnameEmployee;
     }
 
     public String getSecondSurnameEmployee() {
-	return secondSurnameEmployee;
+        return secondSurnameEmployee;
     }
 
     public void setSecondSurnameEmployee(String secondSurnameEmployee) {
-	this.secondSurnameEmployee = secondSurnameEmployee;
+        this.secondSurnameEmployee = secondSurnameEmployee;
+    }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
     public int getIdDepartmentEmployee() {
-	return idDepartmentEmployee;
+        return idDepartmentEmployee;
     }
 
     public void setIdDepartmentEmployee(int idDepartmentEmployee) {
-	this.idDepartmentEmployee = idDepartmentEmployee;
+        this.idDepartmentEmployee = idDepartmentEmployee;
     }
 
     public Department getDepartment() {
-	return department;
+        return department;
     }
 
     public void setDepartment(Department department) {
-	this.department = department;
+        this.department = department;
     }
 
     @Override
     public String toString() {
-	return "Employee [idEmployee=" + idEmployee + ", nameEmployee=" + nameEmployee + ", firstSurnameEmployee=" + firstSurnameEmployee + ", secondSurnameEmployee=" + secondSurnameEmployee + ", idDepartmentEmployee="
+	return "Employee [idEmployee=" + idEmployee + ", nameEmployee=" + nameEmployee + ", firstSurnameEmployee=" + firstSurnameEmployee + ", secondSurnameEmployee=" + secondSurnameEmployee + ", nif=" + nif + ", idDepartmentEmployee="
 		+ idDepartmentEmployee + ", department=" + department + "]";
-    }
-
+    } 
+    
 }

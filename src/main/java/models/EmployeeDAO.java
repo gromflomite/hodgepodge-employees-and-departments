@@ -11,13 +11,13 @@ public class EmployeeDAO {
     // SQL queries
     // --------------------------------------------------------------------------------------------
     // executeQuery -> returns -> ResultSet
-    private final String QUERY_GETALL = " SELECT e.id, e.nombre, e.apellido_1, e.apellido_2, e.id_departamento, d.id AS 'departmentId', d.nombre AS 'departmentName', d.presupuesto, d.gasto FROM empleados as e LEFT JOIN departamentos as d ON e.id_departamento = d.id ORDER BY e.id ASC LIMIT 100; ";
+    private final String QUERY_GETALL = " SELECT e.id, e.nombre, e.apellido_1, e.apellido_2, e.nif,e.id_departamento, d.id AS 'departmentId', d.nombre AS 'departmentName', d.presupuesto, d.gasto FROM empleados as e LEFT JOIN departamentos as d ON e.id_departamento = d.id ORDER BY e.id ASC LIMIT 100; ";
     // --------------------------------------------------------------------------------------------
     
     public ArrayList<Employee> getAll() {
 
 	ArrayList<Employee> dbRegisters = new ArrayList<Employee>();
-
+	
 	try (		
 		Connection dBconnection = ConnectionManager.getConnection(); 
 		PreparedStatement preparedStatement = dBconnection.prepareStatement(QUERY_GETALL);) {
@@ -35,6 +35,7 @@ public class EmployeeDAO {
 		    employee.setNameEmployee(dbResultSet.getString("nombre"));
 		    employee.setFirstSurnameEmployee(dbResultSet.getString("apellido_1"));
 		    employee.setSecondSurnameEmployee(dbResultSet.getString("apellido_2"));
+		    employee.setNif(dbResultSet.getString("nif"));
 		    employee.setIdDepartmentEmployee(dbResultSet.getInt("id_departamento"));
 
 		    department = new Department();
@@ -46,8 +47,7 @@ public class EmployeeDAO {
 
 		    employee.setDepartment(department);
 
-		    dbRegisters.add(employee);
-
+		    dbRegisters.add(employee);		    
 		}
 
 	    }
