@@ -12,15 +12,20 @@ public class EmployeeDAO {
     // --------------------------------------------------------------------------------------------
     // executeQuery -> returns -> ResultSet
     private final String QUERY_GETALL = " SELECT e.id, e.nombre, e.apellido_1, e.apellido_2, e.nif,e.id_departamento, d.id AS 'departmentId', d.nombre AS 'departmentName', d.presupuesto, d.gasto FROM empleados as e LEFT JOIN departamentos as d ON e.id_departamento = d.id ORDER BY e.id ASC LIMIT 100; ";
+
+    // executeUpdate -> returns -> integer with the number of affected rows
+    private final String QUERY_INSERT = " INSERT INTO empleados (nif, nombre, apellido_1, apellido_2, id_departamento) VALUES (?,?,?,?,?); ";
     // --------------------------------------------------------------------------------------------
+
     
+    
+    // getAll()
+    // -----------------------------------------------------------------------------------
     public ArrayList<Employee> getAll() {
 
 	ArrayList<Employee> dbRegisters = new ArrayList<Employee>();
-	
-	try (		
-		Connection dBconnection = ConnectionManager.getConnection(); 
-		PreparedStatement preparedStatement = dBconnection.prepareStatement(QUERY_GETALL);) {
+
+	try (Connection dBconnection = ConnectionManager.getConnection(); PreparedStatement preparedStatement = dBconnection.prepareStatement(QUERY_GETALL);) {
 
 	    try (ResultSet dbResultSet = preparedStatement.executeQuery()) {
 
@@ -47,14 +52,48 @@ public class EmployeeDAO {
 
 		    employee.setDepartment(department);
 
-		    dbRegisters.add(employee);		    
+		    dbRegisters.add(employee);
 		}
 
 	    }
 	} catch (ClassNotFoundException | SQLException e) {
 	    e.printStackTrace(); // TODO
 	}
+
 	return dbRegisters;
     }
+    // End getAll()
+    // ---------------------------------------------------------------------------------------
+    
+    
+
+    // insert()
+    // ---------------------------------------------------------------------------------------
+    public void insert(Employee newEmployee) {
+
+	try (
+		Connection dbConnection = ConnectionManager.getConnection(); 
+		PreparedStatement preparedStatement = dbConnection.prepareStatement(QUERY_INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
+
+	    // Replace ? in the SQL query
+	    preparedStatement.setString	(1, newEmployee.getNameEmployee());
+	    preparedStatement.setString	(2, newEmployee.getFirstSurnameEmployee());
+	    preparedStatement.setString	(3, newEmployee.getSecondSurnameEmployee());
+	    preparedStatement.setString	(4, newEmployee.getNif());
+	    preparedStatement.setInt	(5, newEmployee.getIdDepartmentEmployee());	    
+
+	    // Executing the update against the DB and saving the number of affected rows
+	    int affectedRows = preparedStatement.executeUpdate();
+	    
+	} catch (Exception e) {
+
+	    // TODO LOG and feedback	    
+
+	} 
+	
+    }
+
+    // End insert()
+    // -----------------------------------------------------------------------------------
 
 }
