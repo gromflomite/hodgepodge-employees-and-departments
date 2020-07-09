@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 <!-- CSS normalize (https://necolas.github.io/normalize.css/) -->
 <link rel="stylesheet" href="./css/normalize.css">
-
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!-- Own CSS -->
