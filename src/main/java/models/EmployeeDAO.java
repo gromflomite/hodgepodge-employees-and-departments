@@ -6,28 +6,39 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class EmployeeDAO {
+public class EmployeeDAO {    
 
     // SQL queries
     // --------------------------------------------------------------------------------------------
     // executeQuery -> returns -> ResultSet
-    private final String QUERY_GETALL = " SELECT e.id, e.nombre, e.apellido_1, e.apellido_2, e.nif,e.id_departamento, d.id AS 'departmentId', d.nombre AS 'departmentName', d.presupuesto, d.gasto FROM empleados as e LEFT JOIN departamentos as d ON e.id_departamento = d.id ORDER BY e.id ASC LIMIT 100; ";
+    private final String QUERY_GETALLORFILTERED = " SELECT e.id, e.nombre, e.apellido_1, e.apellido_2, e.nif,e.id_departamento, d.id AS 'departmentId', d.nombre AS 'departmentName', d.presupuesto, d.gasto FROM empleados as e LEFT JOIN departamentos as d ON e.id_departamento = d.id WHERE CONCAT (e.nombre, ' ', e.apellido_1, ' ', e.apellido_2, ' ', e.nif) LIKE ? ORDER BY e.id ASC LIMIT 100; ";
 
     // executeUpdate -> returns -> integer with the number of affected rows
     private final String QUERY_INSERT = " INSERT INTO empleados (nif, nombre, apellido_1, apellido_2, id_departamento) VALUES (?,?,?,?,?); ";
     // --------------------------------------------------------------------------------------------
-
     
     
     // getAll()
     // -----------------------------------------------------------------------------------
-    public ArrayList<Employee> getAll() {
+    public ArrayList<Employee> getAllOrFiltered(String searchFilter) {
 
+	if (searchFilter == null) { // First round --> null
+
+	    searchFilter = ""; // Empty --> all registers in the DB
+	}
+	
 	ArrayList<Employee> dbRegisters = new ArrayList<Employee>();
 
-	try (Connection dBconnection = ConnectionManager.getConnection(); PreparedStatement preparedStatement = dBconnection.prepareStatement(QUERY_GETALL);) {
+	try (
+		Connection dBconnection = ConnectionManager.getConnection(); 
+		PreparedStatement preparedStatement = dBconnection.prepareStatement(QUERY_GETALLORFILTERED);) {
 
-	    try (ResultSet dbResultSet = preparedStatement.executeQuery()) {
+	    	String searchFilterChain = "%" + searchFilter + "%";
+	    
+	    	// Replace ? in the SQL query
+	    	preparedStatement.setString(1, searchFilterChain);	    	
+	    
+	    try (ResultSet dbResultSet = preparedStatement.executeQuery()) {		
 
 		Employee employee;
 		Department department;
@@ -85,12 +96,12 @@ public class EmployeeDAO {
 	    // Executing the update against the DB and saving the number of affected rows
 	    int affectedRows = preparedStatement.executeUpdate();
 	    
+	    System.out.println(affectedRows); // TODO Remove syso and implement LOG
+	    
 	} catch (Exception e) {
 
-	    // TODO LOG and feedback	    
-
-	} 
-	
+	    // TODO LOG and feedback
+	} 	
     }
 
     // End insert()

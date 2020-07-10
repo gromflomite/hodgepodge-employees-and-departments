@@ -65,7 +65,7 @@ public class NewEmployeeController extends HttpServlet {
 	} finally {
 
 	    // Going back to index.jsp
-	    request.getRequestDispatcher("home").forward(request, response);
+	    response.sendRedirect("home");
 	}
 
     }

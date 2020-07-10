@@ -31,7 +31,41 @@
 
 		<h1 class="my-5">UF2176 - Exercice 2</h1>
 
-		<h2 class="my-5">Employees table list</h2>
+		<h2 class="my-5">Search for an employee</h2>
+
+		<form class="ml-5 mr-5" id="search-employee" action="home" method="get">
+
+			<div class="form-row align-items-center">
+
+				<div class="input-group mb-2">
+
+					<div class="input-group-prepend">
+
+						<div class="input-group-text">Name - Surnames - N.I.F.</div>
+
+					</div>
+
+					<input type="text" class="form-control" name="searchFilter" placeholder="Search..." autofocus>
+
+				</div>
+
+				<button type="submit" class="btn btn-warning mt-3">Search</button>
+
+			</div>
+		</form>
+		
+		<h2 class="my-5">
+			<c:set var="emptySearch" value=""/>				
+			
+			<c:if test="${filterCriteria == emptySearch}">
+				<span id="completeList">Complete employees table list</span>
+			</c:if>
+						
+			<c:if test="${filterCriteria != emptySearch}">
+				<span id="filteredList">Filtered employees table list <span id="filterCriteria">(filtered by "${filterCriteria}")</span></span>
+				<span class=""><a href="home">Clean filter</a></span>
+			</c:if>
+		</h2>
 
 		<table id="table" class="tabla table table-striped">
 
@@ -49,7 +83,7 @@
 						<span class="badge badge-warning budget-badges">Expenses</span>
 						<span class="badge badge-danger budget-badges">Overbudget</span>
 						)
-					</td>					
+					</td>
 				</tr>
 
 			</thead>
@@ -66,8 +100,8 @@
 						<td>
 							${dbe.department.departmentName}
 
-							<div class="budget-badges float-right">								
-								<span class="badge badge-success budget-badges">${dbe.department.departmentBudget}</span>								
+							<div class="budget-badges float-right">
+								<span class="badge badge-success budget-badges">${dbe.department.departmentBudget}</span>
 								<span class="badge badge-${(dbe.department.departmentExpenses > dbe.department.departmentBudget) ? 'danger' : 'warning'} budget-badges">${dbe.department.departmentExpenses}</span>
 							</div>
 
@@ -78,57 +112,57 @@
 			</tbody>
 
 		</table>
-		
+
 		<h2 class="my-5">Create new employee</h2>
-		
-		<form id="new-employee" action="newemployee" method="post">
-		
-		<div class="form-group">
-			<label for="nameEmployee">Name: </label>
-			<input type="text" name="nameEmployee" class="form-control" id="nameEmployee" placeholder="Employee name" required>
-		</div>
-		
-		<div class="form-group">
-			<label for="firstSurnameEmployee">First surname: </label>
-			<input type="text" name="firstSurnameEmployee" class="form-control" id="firstSurnameEmployee" placeholder="Employee first surname" required>			
-		</div>
-		
-		<div class="form-group">
-			<label for="secondSurnameEmployee">Second surname: </label>
-			<input type="text" name="secondSurnameEmployee" class="form-control" id="secondSurnameEmployee" placeholder="Employee second surname" required>						
-		</div>
-		
-		<div class="form-group">
-			<label for="nifEmployee">Tax identification number: </label>
-			<input type="text" name="nifEmployee" class="form-control" id="nifEmployee" placeholder="Employee N.I.F." required>			
-		</div>
-		
-		<div class="form-group">
-			<label for="departmentEmployee">Department: </label>
-			<select class="form-control" name="departmentEmployee" id="departmentEmployee">				
-				<option selected>Choose...</option>
-				<option value="1">Education</option>
-				<option value="2">Computing systems</option>
-				<option value="3">Hosting</option>
-				<option value="4">Research and development</option>
-				<option value="5">Advertising</option>
-				<option value="0">No department</option>												
-			</select>
-		</div>
-		
-		<button type="submit" class="btn btn-warning">Create employee</button>	
 
-	</form>
-		
+		<form class="ml-5 mr-5" id="new-employee" action="newemployee" method="post">
 
-		<h2 class="my-5">Raw complete list</h2>
+			<div class="form-group">
+				<label for="nameEmployee">Name: </label>
+				<input type="text" name="nameEmployee" class="form-control" id="nameEmployee" placeholder="Employee name" required>
+			</div>
+
+			<div class="form-group">
+				<label for="firstSurnameEmployee">First surname: </label>
+				<input type="text" name="firstSurnameEmployee" class="form-control" id="firstSurnameEmployee" placeholder="Employee first surname" required>
+			</div>
+
+			<div class="form-group">
+				<label for="secondSurnameEmployee">Second surname: </label>
+				<input type="text" name="secondSurnameEmployee" class="form-control" id="secondSurnameEmployee" placeholder="Employee second surname" required>
+			</div>
+
+			<div class="form-group">
+				<label for="nifEmployee">Tax identification number: </label>
+				<input type="text" name="nifEmployee" class="form-control" id="nifEmployee" placeholder="Employee N.I.F." required>
+			</div>
+
+			<div class="form-group">
+				<label for="departmentEmployee">Department: </label>
+				<select class="form-control" name="departmentEmployee" id="departmentEmployee">
+					<option selected>Choose...</option>
+					<option value="1">Education</option>
+					<option value="2">Computing systems</option>
+					<option value="3">Hosting</option>
+					<option value="4">Research and development</option>
+					<option value="5">Advertising</option>
+					<option value="0">No department</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn btn-warning">Create employee</button>
+
+		</form>
+
+
+
+		<h2 class="my-5">Complete DB raw list</h2>
 
 		<ol>
 			<c:forEach items="${dbRegisters}" var="db">
 				<li>${db}</li>
 			</c:forEach>
 		</ol>
-
 	</main>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

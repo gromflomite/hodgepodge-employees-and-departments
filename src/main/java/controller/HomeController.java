@@ -21,8 +21,15 @@ public class HomeController extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 	
-	ArrayList<Employee> dbRegisters = employeeDAO.getAll();
-	request.setAttribute("dbRegisters", dbRegisters);	
+	String searchFilter = request.getParameter("searchFilter"); // Get value from form
+	
+	
+	
+	ArrayList<Employee> dbRegisters = employeeDAO.getAllOrFiltered(searchFilter); // Sending null to DAO at first round (first page load, no user filter search entered yet)
+	
+	request.setAttribute("dbRegisters", dbRegisters);
+	request.setAttribute("filterCriteria", searchFilter);
+	
 	request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
