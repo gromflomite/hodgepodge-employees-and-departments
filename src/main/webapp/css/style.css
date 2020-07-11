@@ -1,4 +1,4 @@
-body {	
+body {
 	font-family: 'Spartan', sans-serif;
 }
 
@@ -11,15 +11,27 @@ h1 {
 	border-radius: 15px;
 }
 
-h2 {
+#title-bar {
+	display: flex;	
 	color: #ffffff;
-	background-color: #034a01;	
-	padding-top: 8px;
-	padding-left: 15px;
-	padding-bottom: 5px;
+	background-color: #034a01;
 	border-radius: 15px;
+	padding-top: 0.2em;
+	padding-left: 1em;
+	font-size: 2em;
+	margin: 1em 0em 1em;
+	padding-bottom: 5px;
 }
 
 .budget-badges {
 	padding-top: 6px;
+}
+
+#filterCriteria {
+	color: #d61a1a;
+	font-weight: bolder;
+}
+
+#filterCleanButton {
+	margin-left: 30%;
 }

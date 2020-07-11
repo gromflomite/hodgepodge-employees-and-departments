@@ -31,7 +31,9 @@
 
 		<h1 class="my-5">UF2176 - Exercice 2</h1>
 
-		<h2 class="my-5">Search for an employee</h2>
+		<div id="title-bar">
+			<span>Search for an employee</span>
+		</div>
 
 		<form class="ml-5 mr-5" id="search-employee" action="home" method="get">
 
@@ -52,20 +54,23 @@
 				<button type="submit" class="btn btn-warning mt-3">Search</button>
 
 			</div>
-		</form>
 		
-		<h2 class="my-5">
-			<c:set var="emptySearch" value=""/>				
-			
-			<c:if test="${filterCriteria == emptySearch}">
-				<span id="completeList">Complete employees table list</span>
+		</form>
+
+
+		<div>
+			<c:if test="${empty filterCriteria}">
+				<span id="title-bar">Complete employees table list</span>
 			</c:if>
-						
-			<c:if test="${filterCriteria != emptySearch}">
-				<span id="filteredList">Filtered employees table list <span id="filterCriteria">(filtered by "${filterCriteria}")</span></span>
-				<span class=""><a href="home">Clean filter</a></span>
+
+			<c:if test="${not empty filterCriteria}">
+				<div id="title-bar">
+					<span id="filteredListTitle">Employees table filtered by </span>
+					<span id="filterCriteria"> "${filterCriteria}"</span>
+					<span id="filterCleanButton"><a href="home" class="badge badge-warning">Clean filter</a></span>
+				</div>
 			</c:if>
-		</h2>
+		</div>
 
 		<table id="table" class="tabla table table-striped">
 
@@ -113,8 +118,11 @@
 
 		</table>
 
-		<h2 class="my-5">Create new employee</h2>
 
+		<div id="title-bar">
+			<span>Create new employee</span>
+		</div>
+		
 		<form class="ml-5 mr-5" id="new-employee" action="newemployee" method="post">
 
 			<div class="form-group">
@@ -154,15 +162,26 @@
 
 		</form>
 
+		<div>
+			<c:if test="${empty filterCriteria}">
+				<span id="title-bar">Complete employees table list</span>
+			</c:if>
 
+			<c:if test="${not empty filterCriteria}">
+				<div id="title-bar">
+					<span id="filteredListTitle">Employees raw list filtered by </span>
+					<span id="filterCriteria"> "${filterCriteria}"</span>
+					<span id="filterCleanButton"><a href="home" class="badge badge-warning">Clean filter</a></span>
+				</div>
+			</c:if>
+		</div>
 
-		<h2 class="my-5">Complete DB raw list</h2>
-
-		<ol>
+		<ul>
 			<c:forEach items="${dbRegisters}" var="db">
 				<li>${db}</li>
 			</c:forEach>
-		</ol>
+		</ul>
+		
 	</main>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
