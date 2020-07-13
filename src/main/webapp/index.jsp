@@ -31,6 +31,11 @@
 
 		<h1 class="my-5">UF2176 - Exercice 2</h1>
 
+		<div class="forced-errors ml-5 mr-5">						
+			<a href="forceError404" class="btn btn-dark">Force error 404</a>
+			<a href="forceError500.jsp" class="btn btn-dark ml-5">Force error 500</a>
+		</div>
+
 		<div id="title-bar">
 			<span>Search for an employee</span>
 		</div>
@@ -54,7 +59,7 @@
 				<button type="submit" class="btn btn-warning mt-3">Search</button>
 
 			</div>
-		
+
 		</form>
 
 
@@ -67,7 +72,9 @@
 				<div id="title-bar">
 					<span id="filteredListTitle">Employees table filtered by </span>
 					<span id="filterCriteria"> "${filterCriteria}"</span>
-					<span id="filterCleanButton"><a href="home" class="badge badge-warning">Clean filter</a></span>
+					<span id="filterCleanButton">
+						<a href="home" class="badge badge-warning">Clean filter</a>
+					</span>
 				</div>
 			</c:if>
 		</div>
@@ -103,12 +110,21 @@
 						<td>${dbe.secondSurnameEmployee}</td>
 						<td>${dbe.nif}</td>
 						<td>
-							${dbe.department.departmentName}
 
-							<div class="budget-badges float-right">
-								<span class="badge badge-success budget-badges">${dbe.department.departmentBudget}</span>
-								<span class="badge badge-${(dbe.department.departmentExpenses > dbe.department.departmentBudget) ? 'danger' : 'warning'} budget-badges">${dbe.department.departmentExpenses}</span>
-							</div>
+							<!-- Check if employee is in any department -->
+							<c:if test="${empty dbe.department.departmentName}">
+								<span>No department</span>
+							</c:if>
+
+							<c:if test="${not empty dbe.department.departmentName}">
+								<span>${dbe.department.departmentName}</span>
+
+								<!-- Show the department buget details -->
+								<div class="budget-badges float-right">
+									<span class="badge badge-success budget-badges">${dbe.department.departmentBudget}</span>
+									<span class="badge badge-${(dbe.department.departmentExpenses > dbe.department.departmentBudget) ? 'danger' : 'warning'} budget-badges">${dbe.department.departmentExpenses}</span>
+								</div>
+							</c:if>
 
 						</td>
 					</tr>
@@ -122,7 +138,7 @@
 		<div id="title-bar">
 			<span>Create new employee</span>
 		</div>
-		
+
 		<form class="ml-5 mr-5" id="new-employee" action="newemployee" method="post">
 
 			<div class="form-group">
@@ -164,14 +180,16 @@
 
 		<div>
 			<c:if test="${empty filterCriteria}">
-				<span id="title-bar">Complete employees table list</span>
+				<span id="title-bar">Complete employees raw list</span>
 			</c:if>
 
 			<c:if test="${not empty filterCriteria}">
 				<div id="title-bar">
 					<span id="filteredListTitle">Employees raw list filtered by </span>
 					<span id="filterCriteria"> "${filterCriteria}"</span>
-					<span id="filterCleanButton"><a href="home" class="badge badge-warning">Clean filter</a></span>
+					<span id="filterCleanButton">
+						<a href="home" class="badge badge-warning">Clean filter</a>
+					</span>
 				</div>
 			</c:if>
 		</div>
@@ -181,7 +199,7 @@
 				<li>${db}</li>
 			</c:forEach>
 		</ul>
-		
+
 	</main>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -22,9 +22,7 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 	
 	String searchFilter = request.getParameter("searchFilter"); // Get value from form
-	
-	
-	
+		
 	ArrayList<Employee> dbRegisters = employeeDAO.getAllOrFiltered(searchFilter); // Sending null to DAO at first round (first page load, no user filter search entered yet)
 	
 	request.setAttribute("dbRegisters", dbRegisters);

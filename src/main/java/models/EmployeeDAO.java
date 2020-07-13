@@ -48,10 +48,10 @@ public class EmployeeDAO {
 		    employee = new Employee();
 
 		    employee.setIdEmployee(dbResultSet.getInt("id"));
+		    employee.setNif(dbResultSet.getString("nif"));
 		    employee.setNameEmployee(dbResultSet.getString("nombre"));
 		    employee.setFirstSurnameEmployee(dbResultSet.getString("apellido_1"));
-		    employee.setSecondSurnameEmployee(dbResultSet.getString("apellido_2"));
-		    employee.setNif(dbResultSet.getString("nif"));
+		    employee.setSecondSurnameEmployee(dbResultSet.getString("apellido_2"));		    
 		    employee.setIdDepartmentEmployee(dbResultSet.getInt("id_departamento"));
 
 		    department = new Department();
@@ -87,10 +87,10 @@ public class EmployeeDAO {
 		PreparedStatement preparedStatement = dbConnection.prepareStatement(QUERY_INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
 
 	    // Replace ? in the SQL query
-	    preparedStatement.setString	(1, newEmployee.getNameEmployee());
-	    preparedStatement.setString	(2, newEmployee.getFirstSurnameEmployee());
-	    preparedStatement.setString	(3, newEmployee.getSecondSurnameEmployee());
-	    preparedStatement.setString	(4, newEmployee.getNif());
+	    preparedStatement.setString	(1, newEmployee.getNif());
+	    preparedStatement.setString	(2, newEmployee.getNameEmployee());
+	    preparedStatement.setString	(3, newEmployee.getFirstSurnameEmployee());
+	    preparedStatement.setString	(4, newEmployee.getSecondSurnameEmployee());	   
 	    preparedStatement.setInt	(5, newEmployee.getIdDepartmentEmployee());	    
 
 	    // Executing the update against the DB and saving the number of affected rows
@@ -103,7 +103,6 @@ public class EmployeeDAO {
 	    // TODO LOG and feedback
 	} 	
     }
-
     // End insert()
     // -----------------------------------------------------------------------------------
 
