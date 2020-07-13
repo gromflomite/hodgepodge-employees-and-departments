@@ -185,7 +185,7 @@
 
 			<c:if test="${not empty filterCriteria}">
 				<div id="title-bar">
-					<span id="filteredListTitle">Employees raw list filtered by </span>
+					<span id="filteredListTitle">Employees raw list filt. by </span>
 					<span id="filterCriteria"> "${filterCriteria}"</span>
 					<span id="filterCleanButton">
 						<a href="home" class="badge badge-warning">Clean filter</a>
